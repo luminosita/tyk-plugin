@@ -1,0 +1,28 @@
+name: Tyk Grpc Plugin
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read 
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [luminosita-ubuntu]
+        go: ["1.23"]  
+    name: ${{ matrix.os }} @ Go ${{ matrix.go }}
+    runs-on: luminosita-ubuntu
+    steps:
+      - run: echo " The name of your branch is ${{ GitHub.ref }} and your repository is ${{ GitHub.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo " The ${{ GitHub.repository }} repository has been cloned to the runner." 
+      - name: Compile Tyk Plugin
+        run: |
+          docker run --rm -v `pwd`:/plugin-source \
+            --platform=linux/amd64 \
+            tykio/tyk-plugin-compiler:v5.2.1 plugin.so
+      - name: List files in the working directory
+        run: |
+          ls
+      - run: echo " This job's status is ${{ job.status }}."
