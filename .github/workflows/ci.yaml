@@ -24,6 +24,7 @@ jobs:
           # registry: gcr.io
           image: tykio/tyk-plugin-compiler:v5.2.1
           options: -v ${{ github.workspace }}:/plugin-source --platform=linux/amd64 plugin.so
+          run: plugin.so
       - name: List files in the working directory
         run: |
           ls
