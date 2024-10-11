@@ -23,7 +23,7 @@ jobs:
           # password: ${{ secrets.DOCKER_PASSWORD }}
           # registry: gcr.io
           image: tykio/tyk-plugin-compiler:v5.2.1
-          options: -v ${{ github.workspace }}:/plugin-source --platform=linux/amd64 tykio/tyk-plugin-compiler:v5.2.1 plugin.so
+          options: -v ${{ github.workspace }}:/plugin-source --platform=linux/amd64 -- plugin.so
       - name: List files in the working directory
         run: |
           ls
