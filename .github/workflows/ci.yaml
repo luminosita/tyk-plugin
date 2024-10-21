@@ -17,19 +17,19 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: echo " The ${{ GitHub.repository }} repository has been cloned to the runner." 
-      # - uses: addnab/docker-run-action@v3
-      #   with:
-      #     image: tykio/tyk-plugin-compiler:v5.2.1
-      #     options: -v ${{ github.wor kspace }}:/plugin-source --platform=linux/amd64
-      #     run: |
-      #             echo "Hello World"
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build and push
-        uses: docker/build-push-action@v6
+      - uses: addnab/docker-run-action@v3
         with:
-          push: false
-          tags: luminosita/tyk-plugin:latest
+          image: tykio/tyk-plugin-compiler:v5.2.1
+          options: -v ${{ github.workspace }}:/plugin-source --platform=linux/amd64
+          run: |
+                  echo "Hello World"
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+      # - name: Build and push
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     push: false
+      #     tags: luminosita/tyk-plugin:latest
       - name: List files in the working directory
         run: |
           ls
