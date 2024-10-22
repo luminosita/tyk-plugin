@@ -10,7 +10,9 @@ RUN mkdir -p /out
 WORKDIR /out
 RUN /build.sh plugin.so && \
     echo $(pwd) && \
-    tree -a ./
+    ls && \
+    ls / && \
+    tree -a /
 
 FROM scratch
 COPY --from=build /out/plugin_v5.2.1_linux_amd64.so /
