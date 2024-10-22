@@ -6,10 +6,11 @@ RUN apt-get -y install tree
 
 COPY go.mod go.sum plugin.go /plugin-source/
 
-RUN mkdir -p /out
+RUN mkdir -p /out 
 WORKDIR /out
-RUN /build.sh plugin.so
-RUN tree -a /
+RUN /build.sh plugin.so && \
+    echo $(pwd) && \
+    tree -a ./
 
 FROM scratch
 COPY --from=build /out/plugin_v5.2.1_linux_amd64.so /
