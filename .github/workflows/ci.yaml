@@ -26,17 +26,6 @@ jobs:
       - name: List files in the working directory
         run: |
           ls
-      - name: upload zip file to nexus
-        run: curl -v -k -u admin:laptop01 --upload-file plugin_v5.2.1_linux_amd64.so http://nexus.lan/repository/test/com/emisia/tyk-plugin/1.0.0/tyk-plugin-1.0.0.so
-      # - name: Nexus Repo Publish
-      #   uses: sonatype-nexus-community/nexus-repo-github-action@master
-      #   with:
-      #     serverUrl: http://nexus.lan
-      #     username: admin
-      #     password: laptop01 #${{ secrets.password }}
-      #     format: raw
-      #     repository: test
-      #     coordinates: groupId=com.emisia artifactId=tyk-plugin version=1.0.0
-      #     assets: extension=so
-      #     filename: ./plugin_v5.2.1_linux_amd64.so
+      - name: Upload Plugin to Nexus
+        run: curl -v -k -u admin:${{ secrets.NEXUS_PASSWORD }} --upload-file plugin_v5.2.1_linux_amd64.so ${{ vars.NEXUS_TYK_REPO_URL }}/net/emisia/grpc/1.0.0/grpc-1.0.0.so
       - run: echo " This job's status is ${{ job.status }}."
