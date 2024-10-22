@@ -27,6 +27,6 @@ jobs:
       - name: List files in the working directory
         run: |
           ls
-      - name: Upload Plugin to Nexus
+      - name: Upload Plugin to Nexuss
         run: curl -v -k -u admin:${{ secrets.NEXUS_PASSWORD }} --upload-file ${{ github.workspace }}/plugin_v5.2.1_linux_amd64.so ${{ vars.NEXUS_TYK_REPO_URL }}/net/emisia/grpc/1.0.0/grpc-1.0.0.so
       - run: echo " This job's status is ${{ job.status }}."
