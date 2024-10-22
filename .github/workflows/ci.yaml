@@ -23,14 +23,18 @@ jobs:
           options: -v ${{ github.workspace }}:/plugin-source --platform=linux/amd64
           run: |
                 /build.sh plugin.so
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v3
-      # - name: Build and push
-      #   uses: docker/build-push-action@v6
-      #   with:
-      #     push: false
-      #     tags: luminosita/tyk-plugin:latest
       - name: List files in the working directory
         run: |
           ls
+      - name: Nexus Repo Publish
+        uses: sonatype-nexus-community/nexus-repo-github-action@master
+        with:
+          serverUrl: http://nexus.lan
+          username: admin
+          password: laptop01 #${{ secrets.password }}
+          format: raw
+          repository: test
+          coordinates: groupId=com.emisia artifactId=tyk-plugin version=1.0.0
+          assets: extension=so
+          filename: ./plugin_v5.2.1_linux_amd64.so
       - run: echo " This job's status is ${{ job.status }}."
