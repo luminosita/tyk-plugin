@@ -1,6 +1,8 @@
 FROM tykio/tyk-plugin-compiler:v5.2.1 AS build
 
-RUN sudo apt-get -y install tree 
+USER root
+RUN apt-get update
+RUN apt-get -y install tree 
 
 COPY go.mod go.sum plugin.go /plugin-source/
 
