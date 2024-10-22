@@ -11,6 +11,7 @@ jobs:
         os: [luminosita-ubuntu]
         go: ["1.23"]  
     name: ${{ matrix.os }} @ Go ${{ matrix.go }}
+    environment: dev
     runs-on: luminosita-ubuntu
     steps:
       - run: echo " The name of your br anch is ${{ GitHub.ref }} and your repository is ${{ GitHub.repository }}."
@@ -27,5 +28,5 @@ jobs:
         run: |
           ls
       - name: Upload Plugin to Nexus
-        run: curl -v -k -u admin:${{ secrets.NEXUS_PASSWORD }} --upload-file plugin_v5.2.1_linux_amd64.so ${{ vars.NEXUS_TYK_REPO_URL }}/net/emisia/grpc/1.0.0/grpc-1.0.0.so
+        run: curl -v -k -u admin:${{ secrets.NEXUS_PASSWORD }} --upload-file ${{ github.workspace }}/plugin_v5.2.1_linux_amd64.so ${{ vars.NEXUS_TYK_REPO_URL }}/net/emisia/grpc/1.0.0/grpc-1.0.0.so
       - run: echo " This job's status is ${{ job.status }}."
