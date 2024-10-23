@@ -5,11 +5,12 @@ COPY go.mod go.sum plugin.go /plugin-source/
 RUN /build.sh plugin.so && \
     ls /plugin-source/ 
 
-FROM tykio/tyk-gateway:v5.6.1 AS bundle
+FROM golang:1.23 AS bundle
 
-USER root 
-RUN mkdir -p /tmp/bundle
-WORKDIR /tmp/bundle
+RUN go get -u github.com/TykTechnologies/tyk-cli
+
+WORKDIR /usr/src/app
+
 COPY --from=build /plugin-source/plugin_v5.6.1_linux_amd64.so ./
 RUN tyk-cli bundle build -output bundle-latest.zip
 
