@@ -1,11 +1,11 @@
-FROM tykio/tyk-plugin-compiler:v5.2.1 AS build
+FROM tykio/tyk-plugin-compiler:v5.6.1 AS build
 
 COPY go.mod go.sum plugin.go /plugin-source/
 
 RUN /build.sh plugin.so && \
     ls /plugin-source/ 
 
-FROM tykio/tyk-gateway/tyk-gateway:v5.6.1 AS bundle
+FROM tykio/tyk-gateway:v5.6.1 AS bundle
 
 RUN mkdir -p /bundle
 WORKDIR /bundle
