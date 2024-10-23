@@ -15,4 +15,4 @@ WORKDIR /bundle
 RUN tyk bundle build -output bundle-latest.zip
 
 FROM scratch
-COPY --from=bundle /tmp/bundle/bundle-latest.zip /
+COPY --from=bundle /bundle/bundle-latest.zip /
