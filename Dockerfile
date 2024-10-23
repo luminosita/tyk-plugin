@@ -7,7 +7,7 @@ RUN /build.sh plugin.so && \
 
 FROM golang:1.23 AS bundle
 
-RUN go get -u github.com/TykTechnologies/tyk-cli
+RUN go install github.com/TykTechnologies/tyk-cli@latest
 
 WORKDIR /usr/src/app
 
