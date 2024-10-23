@@ -13,7 +13,7 @@ SHELL ["/usr/bin/sh", "-c"]
 RUN mkdir -p /bundle
 WORKDIR /bundle
 COPY --from=build /bundle/plugin_v5.3.5_linux_amd64.so ./
-RUN /opt/tyk-gateway/tyk bundle build -output bundle-latest.zip
+RUN /opt/tyk-gateway/tyk bundle build -y --output bundle-latest.zip
 
 FROM scratch
 COPY --from=bundle /bundle/bundle-latest.zip /
