@@ -25,15 +25,15 @@ jobs:
         with:
           platforms: linux/amd64
           outputs: type=local,dest=${{ github.workspace }}
-      # - uses: addnab/docker-run-action@v3
-      #   with:
-      #     image: tykio/tyk-plugin-compiler:v5.2.1
-      #     options: -v ${{ github.workspace }}:/plugin-source --platform=linux/amd64
-      #     run: |
-      #           /build.sh plugin.so
       - name: List files in the working directory
         run: |
           ls
-      - name: Upload Plugin to Nexuss
-        run: curl -v -k -u admin:${{ secrets.NEXUS_PASSWORD }} --upload-file ${{ github.workspace }}/plugin_v5.2.1_linux_amd64.so ${{ vars.NEXUS_TYK_REPO_URL }}/net/emisia/grpc/1.0.0/grpc-1.0.0.so
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Upload Plugin to Nexus
+        run: curl -v -k -u admin:${{ secrets.NEXUS_PASSWORD }} --upload-file ${{ github.workspace }}/bundle-latest.zip ${{ vars.NEXUS_TYK_REPO_URL }}/net/emisia/grpc/$VERSION/grpc-$VERSION-$SNAPSHOT.zip
+        env:
+          SNAPSHOT: SNAPSHOT-${{ steps.date.outputs.date }}
+          VERSION: "0.0.1"
       - run: echo " This job's status is ${{ job.status }}."
