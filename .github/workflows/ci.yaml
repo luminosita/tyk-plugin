@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64
-          outputs: type=local,dest=path
+          outputs: type=local,dest=${{ github.workspace }}
       # - uses: addnab/docker-run-action@v3
       #   with:
       #     image: tykio/tyk-plugin-compiler:v5.2.1
