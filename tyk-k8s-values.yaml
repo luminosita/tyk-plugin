@@ -1,0 +1,18 @@
+global:
+  secrets:
+    useSecretName: tyk-api-credentials
+  redis:
+    addrs: 
+      - redis-standalone.tyk.svc:6379
+    passSecret:
+      name: redis-credentials
+      keyName: password
+tyk-gateway:
+  gateway:
+    extraEnvs: 
+      - name: TYK_GW_ENABLEBUNDLEDOWNLOADER
+        value: true
+      - name: TYK_GW_BUNDLEBASEURL
+        value: 
+      - name: TYK_GW_BUNDLEINSECURESKIPVERIFY
+        value: true
