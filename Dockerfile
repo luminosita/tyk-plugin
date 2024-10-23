@@ -1,7 +1,5 @@
 FROM tykio/tyk-plugin-compiler:v5.2.1 AS build
 
-RUN go get -u github.com/TykTechnologies/tyk-cli
-
 COPY go.mod go.sum plugin.go /plugin-source/
 
 RUN mkdir -p /bundle
