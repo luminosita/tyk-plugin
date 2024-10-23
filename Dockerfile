@@ -7,6 +7,7 @@ RUN /build.sh plugin.so && \
 
 FROM tykio/tyk-gateway:v5.6.1 AS bundle
 
+USER root 
 RUN mkdir -p /tmp/bundle
 WORKDIR /tmp/bundle
 COPY --from=build /plugin-source/plugin_v5.6.1_linux_amd64.so ./
